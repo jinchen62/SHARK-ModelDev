@@ -77,9 +77,10 @@ if __name__ == "__main__":
     mod_params = dict(model.model.named_parameters())
     for name in mod_params:
         mapper["params." + name] = name
-#        safetensors.torch.save_file(mod_params, safe_name+".safetensors")
+    # safetensors.torch.save_file(mod_params, safe_name+".safetensors")
     class GlobalModule(CompiledModule):
-        params = export_parameters(model.model, external=True, external_scope="",)
+        # params = export_parameters(model.model, external=True, external_scope="", name_mapper=mapper.get)
+        params = export_parameters(model.model)
         compute = jittable(model.model.forward)
 
         def run(self, x=abstractify(inp)):
@@ -87,10 +88,10 @@ if __name__ == "__main__":
 
     print("module defined")
     inst = GlobalModule(context=Context())
-    print("module inst")
+    print("getting mlir module")
     module = CompiledModule.get_mlir_module(inst)
-#    compiled = module.compile()
-    print("got mlir module")
+    # compiled = module.compile()
+    print("writing mlir")
     with open(safe_name+".mlir", "w+") as f:
         f.write(str(module))
 

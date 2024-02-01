@@ -47,3 +47,7 @@ bert-large-uncased
 facebook/opt-13b
 facebook/opt-350m
 facebook/bart-large
+BAAI/bge-base-en-v1.5
+openai/whisper-base
+openai/whisper-small
+openai/whisper-medium

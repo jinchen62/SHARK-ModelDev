@@ -17,8 +17,8 @@ class HFTransformerBuilder:
 
     def __init__(
         self,
-        example_input: torch.Tensor,
         hf_id: str,
+        example_input: torch.Tensor = None,
         auto_model: AutoModel = AutoModel,
         auto_tokenizer: AutoTokenizer = None,
         auto_config: AutoConfig = None,
